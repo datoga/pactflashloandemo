@@ -1,0 +1,33 @@
+(env-keys ["loansadmin"])
+(env-data { "flashloans-admin-keyset":
+  { "keys": ["loansadmin"], "pred": "keys-all" } })
+
+(begin-tx)
+(load "flashloans.pact")
+
+(set-treasury "ETH" 100000.0)
+
+(read-reserve)
+
+(commit-tx)
+
+(begin-tx)
+
+(use flashloans)
+
+(flash-loan-simple "loanId-1" "John" "ETH" 1.0)
+
+(commit-tx)
+
+(begin-tx)
+
+(use flashloans)
+
+(flash-loan-simple "loanId-2" "Doe" "ETH" 5.0)
+
+(commit-tx)
+
+(use flashloans)
+
+(read-history-flash-loans)
+(read-reserve)
